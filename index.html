@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/4077081206.js" crossorigin="anonymous"></script>
+    <title>Scroll Horizontally</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap");
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        color: black;
+        margin: 0;
+        background: linear-gradient(270deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+        background-size: 1400% 1400%;
+        animation: rainbow 50s ease infinite, fontColorChange 10s ease infinite; 
+        overflow-y: hidden;
+        white-space: nowrap;
+      }
+
+      @keyframes rainbow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      @keyframes fontColorChange {
+        0% { color: black; }
+        50% { color: white; }
+        100% { color: black; }
+      }
+
+      .section {
+        width: 400vw;
+        display: flex;
+      }
+
+      .page {
+        width: 100vw;
+        height: auto;
+        display: flex;
+        overflow-x: hidden;
+      }
+      h1 {
+        font-family: "Lobster Two", cursive;
+        font-size: 6.7vw;
+        margin-top: 20vw;
+        padding-left: 2vw;
+      }
+      .title {
+        float: left;
+        width: 65vw;
+        padding: 10px;
+        position: absolute;
+      }
+
+      .mainpic {
+        width: 50vw;
+        margin-left: 28vw;
+      }
+      .box {
+        margin-top: 10vw; 
+        margin-left: 28vw;
+        position: absolute;
+        justify-content: center;
+      }
+
+      .template {
+        height: 45vw;
+        margin: 1vw;
+        width: auto;
+      }
+
+      .magazine-cover {
+        margin-top: -5vw; 
+      }
+
+      .logo {
+        width: 15vw;
+        margin-left: 5vw;
+      }
+
+      .contact {
+        font-family: "Lobster Two", cursive;
+        font-size: 4.5vw;
+        color: white; /* Set the default text color */
+        text-align: left;
+        justify-content: center;
+        transition: color 0.3s ease; /* Smooth transition for color changes */
+        margin-left: 15vw; /* Increase horizontal spacing to move "Contact" to the right */
+      }
+
+      .contact p:hover {
+        color: #ff7f00; /* Change color on hover */
+      }
+
+      .bubble,
+      .bubble2 {
+        position: absolute;
+        z-index: -2;
+        width: 30vw;
+        filter: brightness(50%);
+        animation: movedown 30s infinite;
+        animation-timing-function: linear;
+      }
+
+      .bubble2 {
+        margin: 25vw 65vw;
+        animation: moveup 30s infinite;
+        animation-timing-function: linear;
+      }
+
+      @keyframes movedown {
+        50% {
+          margin: 25vw 5vw;
+          width: 35vw;
+        }
+        100% {
+          margin: 0vw;
+          width: 30vw;
+        }
+      }
+
+      @keyframes moveup {
+        50% {
+          margin: 0vw 65vw;
+          width: 35vw;
+        }
+        100% {
+          margin: 25vw 65vw;
+          width: 30vw;
+        }
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      .resized-picture {
+        width: 25vw; /* Increase width */
+        height: 25vw; /* Increase height */
+        object-fit: cover; 
+        transition: transform 0.3s ease; 
+      }
+
+      .enlarged {
+        transform: scale(2); 
+        z-index: 12; 
+      }
+
+      .audio-link {
+        display: block;
+        margin: 20px auto; 
+        text-align: center;
+      }
+
+      .audio-link img {
+        width: 15vw; 
+        height: 15vw; 
+        object-fit: cover; 
+        cursor: pointer;
+      }
+
+      .audio-link p {
+        font-family: "Lobster Two", cursive;
+        font-size: 4vw;
+        color: white;
+        text-align: center;
+        margin-top: 0;
+        animation: fontColorChange 10s ease infinite; 
+      }
+
+      .creative-works {
+        font-size: 5.5vw; 
+        margin-top: 10vw; /* Increase spacing above "My Creative Works" */
+        margin-bottom: 5vw; /* Add spacing below "My Creative Works" */
+        margin-left: 5vw; /* Add horizontal spacing to the left of "My Creative Works" */
+        margin-right: 20vw; /* Add horizontal spacing to the right of "My Creative Works" */
+      }
+
+      .image-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5vw; /* Increase horizontal spacing between images */
+        margin-left: 5vw; /* Add horizontal spacing to the left of the image row */
+        margin-right: 5vw; /* Add horizontal spacing to the right of the image row */
+        margin-bottom: 10vw; /* Increase spacing below the picture */
+      }
+
+      .contact p {
+        font-family: "Lobster Two", cursive;
+        font-size: 4.5vw;
+        color: inherit; /* Inherit color from animation */
+        text-align: left;
+        margin: 0;
+        transition: color 0.3s ease; /* Smooth transition for color changes */
+        margin-left: 20vw; /* Increase horizontal spacing to move email and social media to the right */
+        margin-right: 5vw; /* Add horizontal spacing to the right of contact details */
+      }
+
+      .contact p:hover {
+        color: #ff7f00; /* Change color on hover */
+      }
+
+      .contact h1 {
+        margin-top: 20vw; /* Increase spacing above "Contact" */
+        margin-left: 5vw; /* Add horizontal spacing to the left of "Contact" */
+        margin-right: 5vw; /* Add horizontal spacing to the right of "Contact" */
+      }
+
+      /* Apply fontColorChange animation to all text elements */
+      h1, p, a {
+        animation: fontColorChange 10s ease infinite;
+      }
+
+      /* Remove conflicting color definitions */
+      .contact p, .audio-link p, .creative-works {
+        color: inherit; /* Inherit color from animation */
+      }
+
+      .contact p:hover {
+        color: #ff7f00; /* Keep hover effect */
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="section">
+        <div class="page">
+          <img src="images/bubble.png" class="bubble" alt="Bubble background" />
+          <img src="images/bubble.png" class="bubble2" alt="Bubble background" />
+
+          <h1 class="title">
+            I'm Ky! <br />
+            Creative Technologist <br />
+            from the DMV
+          </h1>
+
+          <img
+            src="images/mainpicture.png"
+            alt="Picture of me"
+            class="mainpic"
+          />
+        </div>
+        <div class="page">
+          <img src="images/bubble.png" class="bubble" alt="Bubble background" />
+          <img src="images/bubble.png" class="bubble2" alt="Bubble background" />
+
+          <h1>Portfolio</h1>
+          <div class="box">
+            <img src="images/MagazineCover.png" alt="Magazine Cover" class="template magazine-cover" />
+            <!--<img src="./template_2.jpg" alt="" class="template" />
+            <img src="./template_3.jpg" alt="" class="template" />
+            <img src="./template_4.jpg" alt="" class="template" /> -->
+          </div>
+        </div>
+        <div class="page">
+          <img src="images/bubble.png" class="bubble" alt="Bubble background" />
+          <img src="images/bubble.png" class="bubble2" alt="Bubble background" />
+
+          <h1 class="creative-works" style="margin-top: 5vw;">My Creative <br />Works</h1>
+          <div class="box">
+            
+            <br />
+            <div class="image-row" style="margin-bottom: 5vw;">
+              <a
+                href="https://allmylinks.com/444kys"
+                target="_blank"
+              >
+                <img
+                  src="images/tripp.JPG"
+                  class="picture resized-picture"
+                  alt="Click to Explore the Full Experience"
+                />
+              </a>
+            </div>
+            <p class="audio-link">
+              <a
+                href="https://allmylinks.com/444kys"
+                target="_blank"
+                style="color: white; text-decoration: rgba(red, green, blue, alpha);"
+              >
+                Click to Explore the Full Experience
+              </a>
+            </p>
+          </div>
+        <div class="page">
+          <h1 class="contact" style="margin-top: 18vw;">Contact</h1>
+          <div class="box contact">
+            <div>
+              <p>
+                <i class="fa-solid fa-envelope"></i> <!-- Email icon -->
+                stinsonky1519@gmail.com
+              </p>
+            </div>
+            <div>
+              <p>
+                <i class="fa-brands fa-facebook"></i> <!-- Facebook icon -->
+                Kylie Stinson
+              </p>
+            </div>
+            <div>
+              <p>
+                <i class="fa-brands fa-instagram"></i> <!-- Instagram icon -->
+                4theloveofky
+              </p>
+            </div>
+            <div>
+              <p>
+                <i class="fa-brands fa-linkedin"></i> <!-- LinkedIn icon -->
+                kstins
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const pictureIds = [
+          "enlargeable-picture",
+          "enlargeable-picture-2",
+          "enlargeable-picture-3",
+          "enlargeable-picture-4"
+        ];
+
+        pictureIds.forEach(id => {
+          const picture = document.getElementById(id);
+          if (picture) { // Check if the element exists
+            picture.addEventListener("click", function() {
+              picture.classList.toggle("enlarged");
+            });
+          }
+        });
+      });
+
+      window.addEventListener("wheel", (e) => {
+        const ScrollSpeed = 25;
+        const direction = e.deltaY > 0 ? -1 : 1;
+        window.scrollBy({
+          left: direction * ScrollSpeed,
+          behavior: "auto",
+        });
+        e.preventDefault();
+      });
+    </script>
+  </body>
+</html>
